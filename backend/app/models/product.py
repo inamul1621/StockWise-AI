@@ -2,23 +2,29 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Optional, List, TYPE_CHECKING
 
-from sqlalchemy import String, Text, Numeric, Integer, DateTime, CheckConstraint, func
+from sqlalchemy import String, Text, Numeric, Integer, DateTime, ForeignKey, CheckConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
 if TYPE_CHECKING:
     from app.models.inventory import InventoryTransaction
+    from app.models.supplier import Supplier
 
 class Product(Base):
     """
     SQLAlchemy model representing a product in inventory.
-    Stock quantities are tracked here for fast reads, but modifications
-    are strictly controlled to prevent direct/untracked alterations.
+    Linked to an optional primary supplier and multiple inventory transactions.
     """
     __tablename__ = "products"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    supplier_id: Mapped[Optional[int]] = mapped_column(
+        Integer,
+        ForeignKey("suppliers.id", ondelete="RESTRICT"),
+        nullable=True,
+        index=True,
+    )
     name: Mapped[str] = mapped_column(String(200), nullable=False, index=True)
     sku: Mapped[str] = mapped_column(String(100), unique=True, nullable=False, index=True)
     category: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
@@ -39,6 +45,7 @@ class Product(Base):
     )
 
     # Relationships
+    supplier: Mapped[Optional["Supplier"]] = relationship("Supplier", back_populates="products")
     transactions: Mapped[List["InventoryTransaction"]] = relationship(
         "InventoryTransaction",
         back_populates="product",

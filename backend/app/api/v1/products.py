@@ -18,7 +18,7 @@ router = APIRouter(prefix="/products", tags=["Products"])
     response_model=ProductResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Create a new product",
-    description="Registers a new product with an initial stock count of 0. Stock changes are managed exclusively through inventory transactions.",
+    description="Registers a new product with an optional primary supplier and an initial stock count of 0.",
 )
 def create_product(
     product_in: ProductCreate,
@@ -30,11 +30,12 @@ def create_product(
     "",
     response_model=PaginatedProductsResponse,
     summary="List products with search & pagination",
-    description="Returns a paginated list of products. Supports search by product name or SKU, as well as filtering by category.",
+    description="Returns a paginated list of products. Supports search by product name or SKU, as well as filtering by category and supplier.",
 )
 def list_products(
     search: Optional[str] = Query(None, description="Search term matching product name or SKU"),
     category: Optional[str] = Query(None, description="Filter by category"),
+    supplier_id: Optional[int] = Query(None, description="Filter by primary supplier ID"),
     page: int = Query(1, ge=1, description="Page number (starting at 1)"),
     size: int = Query(10, ge=1, le=100, description="Items per page (max 100)"),
     db: Session = Depends(get_db),
@@ -43,6 +44,7 @@ def list_products(
         db=db,
         search=search,
         category=category,
+        supplier_id=supplier_id,
         page=page,
         size=size,
     )
@@ -69,7 +71,7 @@ def get_product(
     "/{product_id}",
     response_model=ProductResponse,
     summary="Update product details",
-    description="Partially update product attributes (name, category, description, unit_price, reorder_level). Stock count cannot be edited here.",
+    description="Partially update product attributes (name, category, description, unit_price, reorder_level, supplier_id). Stock count cannot be edited here.",
 )
 def update_product(
     product_id: int,

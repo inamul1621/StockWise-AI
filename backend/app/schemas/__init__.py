@@ -10,6 +10,13 @@ from app.schemas.inventory import (
     InventoryTransactionResponse,
     PaginatedTransactionsResponse,
 )
+from app.schemas.supplier import (
+    SupplierCreate,
+    SupplierUpdate,
+    SupplierSummary,
+    SupplierDetailResponse,
+    PaginatedSuppliersResponse,
+)
 
 __all__ = [
     "ProductCreate",
@@ -20,4 +27,9 @@ __all__ = [
     "StockOutRequest",
     "InventoryTransactionResponse",
     "PaginatedTransactionsResponse",
+    "SupplierCreate",
+    "SupplierUpdate",
+    "SupplierSummary",
+    "SupplierDetailResponse",
+    "PaginatedSuppliersResponse",
 ]

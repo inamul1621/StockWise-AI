@@ -8,6 +8,8 @@ class ProductBase(BaseModel):
     Base attributes shared across create and response schemas.
     """
     name: str = Field(..., min_length=1, max_length=200, description="Product title/name")
+    sku: Optional[str] = None
+    supplier_id: Optional[int] = Field(None, gt=0, description="Optional primary supplier ID")
     category: Optional[str] = Field(None, max_length=100, description="Product category for grouping")
     description: Optional[str] = Field(None, description="Detailed product description")
     unit_price: Decimal = Field(..., gt=0, decimal_places=2, description="Selling price per unit (must be > 0.00)")
@@ -35,6 +37,7 @@ class ProductUpdate(BaseModel):
     All fields are optional. Stock quantity is strictly excluded.
     """
     name: Optional[str] = Field(None, min_length=1, max_length=200)
+    supplier_id: Optional[int] = Field(None, gt=0)
     category: Optional[str] = Field(None, max_length=100)
     description: Optional[str] = Field(None)
     unit_price: Optional[Decimal] = Field(None, gt=0, decimal_places=2)
@@ -47,6 +50,8 @@ class ProductResponse(BaseModel):
     id: int
     name: str
     sku: str
+    supplier_id: Optional[int] = None
+    supplier_name: Optional[str] = None
     category: Optional[str] = None
     description: Optional[str] = None
     unit_price: Decimal
