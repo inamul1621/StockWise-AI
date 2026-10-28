@@ -1,11 +1,14 @@
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional
+from typing import Optional, List, TYPE_CHECKING
 
 from sqlalchemy import String, Text, Numeric, Integer, DateTime, CheckConstraint, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
+
+if TYPE_CHECKING:
+    from app.models.inventory import InventoryTransaction
 
 class Product(Base):
     """
@@ -33,6 +36,13 @@ class Product(Base):
         nullable=False,
         server_default=func.now(),
         onupdate=func.now(),
+    )
+
+    # Relationships
+    transactions: Mapped[List["InventoryTransaction"]] = relationship(
+        "InventoryTransaction",
+        back_populates="product",
+        passive_deletes=True,
     )
 
     __table_args__ = (
