@@ -11,6 +11,7 @@ def test_health_check_endpoint(client: TestClient):
     assert data["app_name"] == "StockWise AI"
     assert "version" in data
     assert "environment" in data
+    assert data["database"] == "connected"
 
 def test_root_endpoint(client: TestClient):
     """
