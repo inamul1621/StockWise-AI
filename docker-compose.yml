@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database Container
   db:
     image: postgres:16-alpine
     container_name: stockwise_db
@@ -13,6 +14,50 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-stockwise_user} -d ${POSTGRES_DB:-stockwise_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # FastAPI Backend API Container
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stockwise_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      DEBUG: ${DEBUG:-False}
+      PROJECT_NAME: "StockWise AI"
+      VERSION: "0.1.0"
+      API_V1_STR: "/api/v1"
+      POSTGRES_SERVER: "db"
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-stockwise_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-stockwise_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-stockwise_db}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:3000,http://localhost:5173,http://127.0.0.1}
+      API_KEY: ${API_KEY:-}
+    ports:
+      - "8000:8000"
+
+  # React Frontend Nginx Container
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stockwise_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
 
 volumes:
   postgres_data:
