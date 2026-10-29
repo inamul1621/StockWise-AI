@@ -124,7 +124,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Product Name *
             </label>
             <input
@@ -133,12 +133,12 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Ergonomic Office Chair"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               SKU (Stock Keeping Unit) *
             </label>
             <input
@@ -148,14 +148,14 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               value={sku}
               onChange={(e) => setSku(e.target.value.toUpperCase())}
               placeholder="e.g. CHAIR-ERG-01"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 disabled:bg-gray-100 disabled:text-gray-500 uppercase"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 disabled:bg-gray-100 dark:disabled:bg-gray-800/60 disabled:text-gray-500 dark:disabled:text-gray-400 uppercase"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Category
             </label>
             <input
@@ -163,18 +163,18 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               placeholder="e.g. Furniture"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Primary Supplier
             </label>
             <select
               value={supplierId}
               onChange={(e) => setSupplierId(e.target.value ? Number(e.target.value) : '')}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             >
               <option value="">None / Unassigned</option>
               {suppliers.map((s) => (
@@ -188,7 +188,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Cost Price ($) *
             </label>
             <input
@@ -198,13 +198,13 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               required
               value={costPrice}
               onChange={(e) => setCostPrice(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
-            <p className="text-[10px] text-gray-500 mt-0.5">Acquisition unit cost</p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">Acquisition unit cost</p>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Retail Price ($) *
             </label>
             <input
@@ -214,13 +214,13 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               required
               value={unitPrice}
               onChange={(e) => setUnitPrice(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
-            <p className="text-[10px] text-gray-500 mt-0.5">Selling price</p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">Selling price</p>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Reorder Level *
             </label>
             <input
@@ -229,14 +229,14 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
               required
               value={reorderLevel}
               onChange={(e) => setReorderLevel(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
-            <p className="text-[10px] text-gray-500 mt-0.5">Low-stock alert threshold</p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">Low-stock alert threshold</p>
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Description
           </label>
           <textarea
@@ -244,16 +244,16 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Additional product details or internal notes..."
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
-        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100">
+        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100 dark:border-gray-800">
           <button
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             Cancel
           </button>

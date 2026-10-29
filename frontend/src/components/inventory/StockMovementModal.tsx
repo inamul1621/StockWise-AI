@@ -145,17 +145,17 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Toggle Type buttons */}
-        <div className="flex rounded-lg bg-gray-100 p-1">
+        <div className="flex rounded-lg bg-gray-100 dark:bg-gray-800 p-1">
           <button
             type="button"
             onClick={() => setType('IN')}
             className={`flex-1 flex items-center justify-center py-2 text-xs font-bold rounded-md transition-all ${
               type === 'IN'
-                ? 'bg-white text-green-700 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white dark:bg-gray-700 text-green-700 dark:text-green-300 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
-            <ArrowDownLeft className="w-4 h-4 mr-1 text-green-600" />
+            <ArrowDownLeft className="w-4 h-4 mr-1 text-green-600 dark:text-green-400" />
             Stock In (+)
           </button>
           <button
@@ -163,11 +163,11 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
             onClick={() => setType('OUT')}
             className={`flex-1 flex items-center justify-center py-2 text-xs font-bold rounded-md transition-all ${
               type === 'OUT'
-                ? 'bg-white text-red-700 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white dark:bg-gray-700 text-red-700 dark:text-red-300 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
-            <ArrowUpRight className="w-4 h-4 mr-1 text-red-600" />
+            <ArrowUpRight className="w-4 h-4 mr-1 text-red-600 dark:text-red-400" />
             Stock Out (-)
           </button>
         </div>
@@ -177,20 +177,20 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
 
         {/* Product selector */}
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Target Product *
           </label>
           {selectedProduct ? (
-            <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
-              <p className="font-semibold text-sm text-gray-900">{selectedProduct.name}</p>
-              <p className="text-xs text-gray-500 font-mono mt-0.5">SKU: {selectedProduct.sku}</p>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <p className="font-semibold text-sm text-gray-900 dark:text-white">{selectedProduct.name}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5">SKU: {selectedProduct.sku}</p>
             </div>
           ) : (
             <select
               required
               value={productId}
               onChange={(e) => handleProductSelect(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             >
               <option value="">-- Select a product --</option>
               {products.map((p) => (
@@ -202,16 +202,16 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
           )}
 
           {activeProduct && (
-            <div className="mt-2 text-xs flex items-center justify-between px-3 py-1.5 bg-brand-50 border border-brand-200 rounded-md">
-              <span className="text-brand-900 font-medium">Current Stock Balance:</span>
-              <span className="font-black text-brand-700">{activeProduct.current_stock} units</span>
+            <div className="mt-2 text-xs flex items-center justify-between px-3 py-1.5 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-800/60 rounded-md">
+              <span className="text-brand-900 dark:text-brand-300 font-medium">Current Stock Balance:</span>
+              <span className="font-black text-brand-700 dark:text-brand-400">{activeProduct.current_stock} units</span>
             </div>
           )}
         </div>
 
         {/* Quantity */}
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Quantity (Units) *
           </label>
           <input
@@ -221,13 +221,13 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
             value={quantity}
             onChange={(e) => setQuantity(e.target.value ? Number(e.target.value) : '')}
             placeholder="e.g. 25"
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Reference
             </label>
             <input
@@ -235,12 +235,12 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
               value={reference}
               onChange={(e) => setReference(e.target.value)}
               placeholder="e.g. PO-9988, INV-201"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Reason
             </label>
             <input
@@ -248,13 +248,13 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               placeholder={type === 'IN' ? 'e.g. Supplier delivery' : 'e.g. Retail sale, damage'}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Internal Notes
           </label>
           <textarea
@@ -262,16 +262,16 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Additional notes for audit tracking..."
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
-        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100">
+        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100 dark:border-gray-800">
           <button
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             Cancel
           </button>

@@ -95,7 +95,7 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
         {error && <Alert type="error" message={error} onClose={() => setError(null)} />}
 
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Supplier / Company Name *
           </label>
           <input
@@ -104,12 +104,12 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Apex Industrial Supplies"
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Contact Person
           </label>
           <input
@@ -117,13 +117,13 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
             value={contactPerson}
             onChange={(e) => setContactPerson(e.target.value)}
             placeholder="e.g. John Doe (Account Manager)"
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Email Address
             </label>
             <input
@@ -131,12 +131,12 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="orders@apexsupplies.com"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+            <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
               Phone Number
             </label>
             <input
@@ -144,13 +144,13 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+1-555-0199"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-bold uppercase text-gray-700 mb-1">
+          <label className="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-1">
             Office / Warehouse Address
           </label>
           <textarea
@@ -158,16 +158,16 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="123 Logistics Way, Suite 400..."
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+            className="w-full px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
           />
         </div>
 
-        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100">
+        <div className="flex justify-end space-x-3 pt-3 border-t border-gray-100 dark:border-gray-800">
           <button
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             Cancel
           </button>

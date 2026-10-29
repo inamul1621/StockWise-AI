@@ -106,34 +106,34 @@ export const ReportsPage: React.FC = () => {
       {/* Header and Toggle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-gray-950">Inventory Reports & Analytics</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-2xl font-black text-gray-950 dark:text-white">Inventory Reports & Analytics</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Financial valuation breakdowns and movement volume tracking
           </p>
         </div>
 
         {/* Report Tab Selector */}
-        <div className="inline-flex rounded-xl bg-gray-200 p-1">
+        <div className="inline-flex rounded-xl bg-gray-200 dark:bg-gray-800 p-1">
           <button
             onClick={() => setActiveReport('valuation')}
             className={`flex items-center px-4 py-2 text-xs font-bold rounded-lg transition-all ${
               activeReport === 'valuation'
-                ? 'bg-white text-gray-950 shadow-sm'
-                : 'text-gray-600 hover:text-gray-950'
+                ? 'bg-white dark:bg-gray-700 text-gray-950 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-white'
             }`}
           >
-            <BarChart3 className="w-4 h-4 mr-1.5 text-brand-600" />
+            <BarChart3 className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400" />
             Stock Valuation
           </button>
           <button
             onClick={() => setActiveReport('movements')}
             className={`flex items-center px-4 py-2 text-xs font-bold rounded-lg transition-all ${
               activeReport === 'movements'
-                ? 'bg-white text-gray-950 shadow-sm'
-                : 'text-gray-600 hover:text-gray-950'
+                ? 'bg-white dark:bg-gray-700 text-gray-950 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-white'
             }`}
           >
-            <ArrowLeftRight className="w-4 h-4 mr-1.5 text-brand-600" />
+            <ArrowLeftRight className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400" />
             Movements Summary
           </button>
         </div>
@@ -178,23 +178,23 @@ export const ReportsPage: React.FC = () => {
           )}
 
           {/* Filter Bar */}
-          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
             <div className="flex items-center space-x-2">
               <Filter className="w-3.5 h-3.5 text-gray-400" />
-              <span className="font-semibold text-gray-700">Filter Category:</span>
+              <span className="font-semibold text-gray-700 dark:text-gray-300">Filter Category:</span>
               <input
                 type="text"
                 placeholder="e.g. Electronics, Tools"
                 value={valCategory}
                 onChange={(e) => setValCategory(e.target.value)}
-                className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
+                className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
               />
               <button
                 onClick={() => {
                   setValPage(1);
                   fetchValuationReport();
                 }}
-                className="px-3 py-1.5 bg-gray-900 hover:bg-black text-white font-semibold rounded-lg transition-colors"
+                className="px-3 py-1.5 bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 text-white font-semibold rounded-lg transition-colors"
               >
                 Apply
               </button>
@@ -203,7 +203,7 @@ export const ReportsPage: React.FC = () => {
             <button
               onClick={fetchValuationReport}
               disabled={valLoading}
-              className="inline-flex items-center px-3 py-1.5 font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors"
+              className="inline-flex items-center px-3 py-1.5 font-semibold text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
             >
               <RefreshCw className={`w-3.5 h-3.5 mr-1 ${valLoading ? 'animate-spin' : ''}`} />
               Refresh
@@ -211,19 +211,19 @@ export const ReportsPage: React.FC = () => {
           </div>
 
           {/* Itemized Valuation Table */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
             {valLoading ? (
               <Spinner size="md" label="Calculating valuation report..." className="py-16" />
             ) : !valuationData || valuationData.items.length === 0 ? (
-              <div className="p-12 text-center text-gray-500">
-                <p className="text-sm font-semibold text-gray-700">No products found.</p>
+              <div className="p-12 text-center text-gray-500 dark:text-gray-400">
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">No products found.</p>
               </div>
             ) : (
               <>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full min-w-[800px] text-left border-collapse">
                     <thead>
-                      <tr className="bg-gray-50 text-[11px] font-bold text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                      <tr className="bg-gray-50 dark:bg-gray-800/60 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-800">
                         <th className="py-3 px-4">Product Name</th>
                         <th className="py-3 px-4">SKU</th>
                         <th className="py-3 px-4 text-center">Stock</th>
@@ -235,38 +235,38 @@ export const ReportsPage: React.FC = () => {
                         <th className="py-3 px-4 text-center">Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100 text-sm">
+                    <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
                       {valuationData.items.map((item) => (
-                        <tr key={item.product_id} className="hover:bg-gray-50/80 transition-colors">
-                          <td className="py-3 px-4 font-semibold text-gray-900">{item.name}</td>
-                          <td className="py-3 px-4 font-mono text-xs text-gray-600">{item.sku}</td>
-                          <td className="py-3 px-4 text-center font-black">{item.current_stock}</td>
-                          <td className="py-3 px-4 text-right font-medium text-gray-600">
+                        <tr key={item.product_id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
+                          <td className="py-3 px-4 font-semibold text-gray-900 dark:text-white">{item.name}</td>
+                          <td className="py-3 px-4 font-mono text-xs text-gray-600 dark:text-gray-400">{item.sku}</td>
+                          <td className="py-3 px-4 text-center font-black text-gray-950 dark:text-white">{item.current_stock}</td>
+                          <td className="py-3 px-4 text-right font-medium text-gray-600 dark:text-gray-400">
                             {formatCurrency(item.cost_price)}
                           </td>
-                          <td className="py-3 px-4 text-right font-semibold text-gray-900">
+                          <td className="py-3 px-4 text-right font-semibold text-gray-900 dark:text-white">
                             {formatCurrency(item.unit_price)}
                           </td>
-                          <td className="py-3 px-4 text-right font-bold text-gray-800">
+                          <td className="py-3 px-4 text-right font-bold text-gray-800 dark:text-gray-300">
                             {formatCurrency(item.total_cost_value)}
                           </td>
-                          <td className="py-3 px-4 text-right font-bold text-gray-900">
+                          <td className="py-3 px-4 text-right font-bold text-gray-900 dark:text-white">
                             {formatCurrency(item.total_retail_value)}
                           </td>
-                          <td className="py-3 px-4 text-right font-black text-brand-700">
+                          <td className="py-3 px-4 text-right font-black text-brand-700 dark:text-brand-400">
                             {formatCurrency(item.potential_profit)}
                           </td>
                           <td className="py-3 px-4 text-center">
                             {item.stock_status === 'OUT_OF_STOCK' ? (
-                              <span className="px-2 py-0.5 text-[11px] font-bold bg-red-100 text-red-700 rounded-full">
+                              <span className="px-2 py-0.5 text-[11px] font-bold bg-red-100 text-red-700 dark:bg-red-950/60 dark:text-red-400 border border-transparent dark:border-red-900/50 rounded-full">
                                 Out of Stock
                               </span>
                             ) : item.stock_status === 'LOW_STOCK' ? (
-                              <span className="px-2 py-0.5 text-[11px] font-bold bg-amber-100 text-amber-700 rounded-full">
+                              <span className="px-2 py-0.5 text-[11px] font-bold bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border border-transparent dark:border-amber-900/50 rounded-full">
                                 Low Stock
                               </span>
                             ) : (
-                              <span className="px-2 py-0.5 text-[11px] font-bold bg-green-100 text-green-700 rounded-full">
+                              <span className="px-2 py-0.5 text-[11px] font-bold bg-green-100 text-green-700 dark:bg-green-950/60 dark:text-green-400 border border-transparent dark:border-green-900/50 rounded-full">
                                 In Stock
                               </span>
                             )}
@@ -299,8 +299,8 @@ export const ReportsPage: React.FC = () => {
           {movError && <Alert type="error" message={movError} onClose={() => setMovError(null)} />}
 
           {/* Date & Filter Controls */}
-          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-wrap items-center gap-3 text-xs">
-            <div className="flex items-center space-x-1.5 text-gray-500 font-semibold">
+          <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-wrap items-center gap-3 text-xs">
+            <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 font-semibold">
               <Calendar className="w-3.5 h-3.5" />
               <span>Date Range:</span>
             </div>
@@ -309,20 +309,20 @@ export const ReportsPage: React.FC = () => {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500"
+              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
             />
             <span className="text-gray-400">to</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500"
+              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
             />
 
             <select
               value={selectedProductId}
               onChange={(e) => setSelectedProductId(e.target.value ? Number(e.target.value) : '')}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
+              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
             >
               <option value="">All Catalog Products</option>
               {productsList.map((p) => (
@@ -335,7 +335,7 @@ export const ReportsPage: React.FC = () => {
             <button
               onClick={fetchMovementsReport}
               disabled={movLoading}
-              className="px-4 py-1.5 bg-gray-900 hover:bg-black text-white font-semibold rounded-lg transition-colors"
+              className="px-4 py-1.5 bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 text-white font-semibold rounded-lg transition-colors"
             >
               Filter Movements
             </button>
@@ -375,9 +375,9 @@ export const ReportsPage: React.FC = () => {
           )}
 
           {/* Product Movement Breakdown Table */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100">
-              <h3 className="text-base font-bold text-gray-900">
+          <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+              <h3 className="text-base font-bold text-gray-900 dark:text-white">
                 Movement Breakdown by Product
               </h3>
             </div>
@@ -385,15 +385,15 @@ export const ReportsPage: React.FC = () => {
             {movLoading ? (
               <Spinner size="md" label="Aggregating movement records..." className="py-16" />
             ) : !movementsData || movementsData.product_breakdowns.length === 0 ? (
-              <div className="p-12 text-center text-gray-500">
-                <p className="text-sm font-semibold text-gray-700">No transactions recorded in this period.</p>
+              <div className="p-12 text-center text-gray-500 dark:text-gray-400">
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">No transactions recorded in this period.</p>
                 <p className="text-xs mt-1">Try widening your date range.</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+                <table className="w-full min-w-[700px] text-left border-collapse">
                   <thead>
-                    <tr className="bg-gray-50 text-[11px] font-bold text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                    <tr className="bg-gray-50 dark:bg-gray-800/60 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-800">
                       <th className="py-3 px-4">Product Name</th>
                       <th className="py-3 px-4">SKU</th>
                       <th className="py-3 px-4 text-center">Units In (+)</th>
@@ -402,31 +402,31 @@ export const ReportsPage: React.FC = () => {
                       <th className="py-3 px-4 text-right">Transactions Count</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100 text-sm">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
                     {movementsData.product_breakdowns.map((b) => (
-                      <tr key={b.product_id} className="hover:bg-gray-50/80 transition-colors">
-                        <td className="py-3 px-4 font-semibold text-gray-900">{b.product_name}</td>
-                        <td className="py-3 px-4 font-mono text-xs text-gray-600">{b.product_sku}</td>
-                        <td className="py-3 px-4 text-center font-bold text-green-700">
+                      <tr key={b.product_id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
+                        <td className="py-3 px-4 font-semibold text-gray-900 dark:text-white">{b.product_name}</td>
+                        <td className="py-3 px-4 font-mono text-xs text-gray-600 dark:text-gray-400">{b.product_sku}</td>
+                        <td className="py-3 px-4 text-center font-bold text-green-700 dark:text-green-400">
                           +{b.units_in}
                         </td>
-                        <td className="py-3 px-4 text-center font-bold text-red-700">
+                        <td className="py-3 px-4 text-center font-bold text-red-700 dark:text-red-400">
                           -{b.units_out}
                         </td>
                         <td className="py-3 px-4 text-center font-black">
                           <span
                             className={
                               b.net_movement > 0
-                                ? 'text-green-700'
+                                ? 'text-green-700 dark:text-green-400'
                                 : b.net_movement < 0
-                                ? 'text-red-700'
-                                : 'text-gray-600'
+                                ? 'text-red-700 dark:text-red-400'
+                                : 'text-gray-600 dark:text-gray-400'
                             }
                           >
                             {b.net_movement > 0 ? `+${b.net_movement}` : b.net_movement}
                           </span>
                         </td>
-                        <td className="py-3 px-4 text-right font-medium text-gray-600">
+                        <td className="py-3 px-4 text-right font-medium text-gray-600 dark:text-gray-400">
                           {b.transaction_count} tx
                         </td>
                       </tr>

@@ -20,7 +20,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', className = '', l
         role="status"
         aria-label={label}
       />
-      {label && <span className="mt-2 text-sm text-gray-500">{label}</span>}
+      {label && <span className="mt-2 text-sm text-gray-500 dark:text-gray-400">{label}</span>}
     </div>
   );
 };

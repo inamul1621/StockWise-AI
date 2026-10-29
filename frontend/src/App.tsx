@@ -17,6 +17,7 @@ import { dashboardApi } from './api/dashboard';
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
   const [lowStockCount, setLowStockCount] = useState<number>(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Modal States
   const [productModalOpen, setProductModalOpen] = useState(false);
@@ -79,19 +80,26 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col text-gray-900 font-sans">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col text-gray-900 dark:text-gray-100 font-sans transition-colors duration-150">
       {/* Top Bar */}
       <Navbar
         onQuickStockIn={() => handleOpenStockMovement('IN')}
         onQuickStockOut={() => handleOpenStockMovement('OUT')}
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Navigation Sidebar */}
         <Sidebar
           activeTab={activeTab}
-          onTabChange={setActiveTab}
+          onTabChange={(tab) => {
+            setActiveTab(tab);
+            setIsMobileMenuOpen(false);
+          }}
           lowStockCount={lowStockCount}
+          isMobileOpen={isMobileMenuOpen}
+          onCloseMobile={() => setIsMobileMenuOpen(false)}
         />
 
         {/* Main Content View */}
