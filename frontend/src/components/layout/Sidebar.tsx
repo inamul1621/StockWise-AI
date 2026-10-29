@@ -7,7 +7,10 @@ import {
   BarChart3,
   AlertTriangle,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 export type NavTab = 'dashboard' | 'products' | 'inventory' | 'suppliers' | 'reports';
 
@@ -26,6 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen,
   onCloseMobile,
 }) => {
+  const { isDark, setTheme } = useTheme();
   const navItems = [
     {
       id: 'dashboard' as NavTab,
@@ -115,9 +119,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })}
       </div>
 
-      <div className="p-4 border-t border-gray-100 dark:border-gray-800 text-[11px] text-gray-500 dark:text-gray-400 space-y-1">
-        <p className="font-semibold text-gray-700 dark:text-gray-300">StockWise Core Engine</p>
-        <p>PostgreSQL 18 Atomic Ledger</p>
+      <div className="p-4 border-t border-gray-100 dark:border-gray-800 space-y-3">
+        {/* Appearance Switcher */}
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">Theme</span>
+          <div className="inline-flex items-center bg-gray-100 dark:bg-gray-800 p-0.5 rounded-lg border border-gray-200 dark:border-gray-700">
+            <button
+              type="button"
+              onClick={() => setTheme('light')}
+              className={`flex items-center space-x-1 px-2 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                !isDark
+                  ? 'bg-white text-gray-950 shadow-xs'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+              }`}
+              title="Switch to Light Mode"
+            >
+              <Sun className="w-3 h-3 text-amber-500" />
+              <span>Light</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTheme('dark')}
+              className={`flex items-center space-x-1 px-2 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                isDark
+                  ? 'bg-gray-900 text-white shadow-xs'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+              }`}
+              title="Switch to Dark Mode"
+            >
+              <Moon className="w-3 h-3 text-indigo-400" />
+              <span>Dark</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="text-[11px] text-gray-500 dark:text-gray-400 space-y-0.5">
+          <p className="font-semibold text-gray-700 dark:text-gray-300">StockWise Core Engine</p>
+          <p>PostgreSQL 18 Atomic Ledger</p>
+        </div>
       </div>
     </div>
   );

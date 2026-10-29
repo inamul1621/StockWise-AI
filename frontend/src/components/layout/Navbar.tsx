@@ -15,7 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isMobileMenuOpen,
   onToggleMobileMenu,
 }) => {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors duration-150">
@@ -85,19 +85,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           )}
 
-          {/* Dark Mode Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {isDark ? (
-              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
-            ) : (
-              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-            )}
-          </button>
+          {/* Theme Switcher (Light / Dark) */}
+          <div className="flex items-center bg-gray-100 dark:bg-gray-800 p-0.5 sm:p-1 rounded-xl border border-gray-200 dark:border-gray-700/60 transition-colors">
+            <button
+              type="button"
+              onClick={() => setTheme('light')}
+              className={`flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+                !isDark
+                  ? 'bg-white text-gray-950 shadow-xs'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+              }`}
+              title="Switch to Light mode"
+              aria-label="Light mode"
+            >
+              <Sun className="w-3.5 h-3.5 text-amber-500" />
+              <span className="hidden sm:inline">Light</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTheme('dark')}
+              className={`flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+                isDark
+                  ? 'bg-gray-900 text-white shadow-xs'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+              }`}
+              title="Switch to Dark mode"
+              aria-label="Dark mode"
+            >
+              <Moon className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="hidden sm:inline">Dark</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
