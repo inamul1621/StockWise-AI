@@ -74,6 +74,7 @@ class SupplierService:
                 category=p.category,
                 description=p.description,
                 unit_price=p.unit_price,
+                cost_price=p.cost_price,
                 current_stock=p.current_stock,
                 reorder_level=p.reorder_level,
                 created_at=p.created_at,

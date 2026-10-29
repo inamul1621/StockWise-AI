@@ -12,6 +12,7 @@ class ProductBase(BaseModel):
     supplier_id: Optional[int] = Field(None, gt=0, description="Optional primary supplier ID")
     category: Optional[str] = Field(None, max_length=100, description="Product category for grouping")
     description: Optional[str] = Field(None, description="Detailed product description")
+    cost_price: Decimal = Field(Decimal("0.00"), ge=0, decimal_places=2, description="Purchasing cost per unit (for inventory valuation)")
     unit_price: Decimal = Field(..., gt=0, decimal_places=2, description="Selling price per unit (must be > 0.00)")
     reorder_level: int = Field(10, ge=0, description="Threshold quantity that triggers a low-stock alert")
 
@@ -40,6 +41,7 @@ class ProductUpdate(BaseModel):
     supplier_id: Optional[int] = Field(None, gt=0)
     category: Optional[str] = Field(None, max_length=100)
     description: Optional[str] = Field(None)
+    cost_price: Optional[Decimal] = Field(None, ge=0, decimal_places=2)
     unit_price: Optional[Decimal] = Field(None, gt=0, decimal_places=2)
     reorder_level: Optional[int] = Field(None, ge=0)
 
@@ -54,6 +56,7 @@ class ProductResponse(BaseModel):
     supplier_name: Optional[str] = None
     category: Optional[str] = None
     description: Optional[str] = None
+    cost_price: Decimal
     unit_price: Decimal
     current_stock: int
     reorder_level: int

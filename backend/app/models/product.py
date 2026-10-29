@@ -29,6 +29,12 @@ class Product(Base):
     sku: Mapped[str] = mapped_column(String(100), unique=True, nullable=False, index=True)
     category: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    cost_price: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2),
+        nullable=False,
+        default=Decimal("0.00"),
+        server_default="0.00",
+    )
     unit_price: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     current_stock: Mapped[int] = mapped_column(Integer, nullable=False, default=0, server_default="0")
     reorder_level: Mapped[int] = mapped_column(Integer, nullable=False, default=10, server_default="10")
@@ -54,6 +60,7 @@ class Product(Base):
 
     __table_args__ = (
         CheckConstraint("unit_price > 0", name="ck_products_unit_price_positive"),
+        CheckConstraint("cost_price >= 0", name="ck_products_cost_price_non_negative"),
         CheckConstraint("current_stock >= 0", name="ck_products_current_stock_non_negative"),
         CheckConstraint("reorder_level >= 0", name="ck_products_reorder_level_non_negative"),
     )

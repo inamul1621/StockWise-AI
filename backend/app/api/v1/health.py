@@ -1,3 +1,4 @@
+import logging
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -6,6 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.database import get_db
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -23,7 +26,8 @@ class HealthResponse(BaseModel):
 )
 def health_check(db: Session = Depends(get_db)):
     """
-    Checks the service health and verifies live PostgreSQL connectivity.
+    Checks service health and verifies live PostgreSQL connectivity
+    without exposing raw exceptions, credentials, or internal details.
     """
     db_status = "connected"
     try:
@@ -32,7 +36,8 @@ def health_check(db: Session = Depends(get_db)):
         if result != 1:
             db_status = "unexpected_response"
     except Exception as e:
-        db_status = f"disconnected: {e}"
+        logger.error(f"Health check failed to query database: {e}", exc_info=True)
+        db_status = "disconnected"
 
     is_healthy = db_status == "connected"
     payload = HealthResponse(

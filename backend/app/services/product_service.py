@@ -24,6 +24,7 @@ class ProductService:
             supplier_name=product.supplier.name if product.supplier else None,
             category=product.category,
             description=product.description,
+            cost_price=product.cost_price,
             unit_price=product.unit_price,
             current_stock=product.current_stock,
             reorder_level=product.reorder_level,
@@ -62,6 +63,7 @@ class ProductService:
             supplier_id=product_in.supplier_id,
             category=product_in.category.strip() if product_in.category else None,
             description=product_in.description.strip() if product_in.description else None,
+            cost_price=product_in.cost_price,
             unit_price=product_in.unit_price,
             reorder_level=product_in.reorder_level,
             current_stock=0,  # Always initialized to 0; only inventory movements change stock
