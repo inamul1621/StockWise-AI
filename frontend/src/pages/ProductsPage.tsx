@@ -105,7 +105,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
   const formatPrice = (val: string) => {
     const num = parseFloat(val);
-    return isNaN(num) ? '$0.00' : `$${num.toFixed(2)}`;
+    return isNaN(num)
+      ? '₹0.00'
+      : new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(num);
   };
 
   return (

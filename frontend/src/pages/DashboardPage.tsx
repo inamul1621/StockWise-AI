@@ -9,7 +9,7 @@ import {
   Boxes,
   Layers,
   AlertTriangle,
-  DollarSign,
+  IndianRupee,
   TrendingUp,
   Truck,
   RefreshCw,
@@ -55,8 +55,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const formatCurrency = (val: string | number) => {
     const num = typeof val === 'string' ? parseFloat(val) : val;
     return isNaN(num)
-      ? '$0.00'
-      : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+      ? '₹0.00'
+      : new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(num);
   };
 
   if (loading && !summary) {
@@ -107,7 +107,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             title="Inventory Valuation"
             value={formatCurrency(summary.total_inventory_cost_value)}
             subtitle="Valued at cost price"
-            icon={<DollarSign className="w-5 h-5" />}
+            icon={<IndianRupee className="w-5 h-5" />}
             variant="default"
           />
 
