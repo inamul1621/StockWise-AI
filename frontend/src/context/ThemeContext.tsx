@@ -26,8 +26,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
+      root.style.colorScheme = 'light';
     }
     try {
       localStorage.setItem('stockwise-theme', theme);
