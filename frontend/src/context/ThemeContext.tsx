@@ -16,32 +16,44 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     try {
       const saved = localStorage.getItem('stockwise-theme') as Theme | null;
       if (saved === 'light' || saved === 'dark') return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return 'light'; // Default to clean light mode
     } catch {
       return 'light';
     }
   });
 
-  useEffect(() => {
+  const applyThemeToDOM = (activeTheme: Theme) => {
     const root = document.documentElement;
-    if (theme === 'dark') {
+    const body = document.body;
+    if (activeTheme === 'dark') {
       root.classList.add('dark');
+      if (body) body.classList.add('dark');
       root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
+      if (body) body.classList.remove('dark');
       root.style.colorScheme = 'light';
     }
+  };
+
+  useEffect(() => {
+    applyThemeToDOM(theme);
     try {
       localStorage.setItem('stockwise-theme', theme);
     } catch {}
   }, [theme]);
 
   const setTheme = (newTheme: Theme) => {
+    // Immediately apply to DOM for instant visual response
+    applyThemeToDOM(newTheme);
+    try {
+      localStorage.setItem('stockwise-theme', newTheme);
+    } catch {}
     setThemeState(newTheme);
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (

@@ -80,7 +80,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col text-gray-900 dark:text-gray-100 font-sans transition-colors duration-150">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col text-gray-900 dark:text-gray-100 font-sans transition-colors duration-150">
       {/* Top Bar */}
       <Navbar
         onQuickStockIn={() => handleOpenStockMovement('IN')}
@@ -103,7 +103,7 @@ export const App: React.FC = () => {
         />
 
         {/* Main Content View */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-950">
           <div className="max-w-7xl mx-auto">
             {activeTab === 'dashboard' && (
               <DashboardPage
