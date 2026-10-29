@@ -88,25 +88,25 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({
   return (
     <div className="space-y-6">
       {/* Header and Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-black text-gray-950 dark:text-white">Inventory Audit Ledger</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h1 className="text-xl sm:text-2xl font-black text-gray-950 dark:text-white">Inventory Audit Ledger</h1>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             Immutable physical stock transaction history & movement records
           </p>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 w-full sm:w-auto">
           <button
             onClick={() => onOpenStockMovement('IN')}
-            className="inline-flex items-center px-3.5 py-2 text-xs font-semibold text-white bg-green-600 hover:bg-green-700 rounded-xl shadow-sm transition-colors"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold text-white bg-green-600 hover:bg-green-700 rounded-xl shadow-sm transition-colors"
           >
             <Plus className="w-4 h-4 mr-1" />
             Stock In
           </button>
           <button
             onClick={() => onOpenStockMovement('OUT')}
-            className="inline-flex items-center px-3.5 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-sm transition-colors"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-sm transition-colors"
           >
             <Minus className="w-4 h-4 mr-1" />
             Stock Out
@@ -117,9 +117,9 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({
       {error && <Alert type="error" message={error} onClose={() => setError(null)} />}
 
       {/* Filter Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 font-semibold">
+      <div className="bg-white dark:bg-gray-900 p-3.5 sm:p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 font-semibold shrink-0">
             <Filter className="w-3.5 h-3.5" />
             <span>Filter Movements:</span>
           </div>
@@ -130,7 +130,7 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({
               setTypeFilter(e.target.value as TransactionType | '');
               setPage(1);
             }}
-            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
+            className="w-full sm:w-auto px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
           >
             <option value="">All Types (IN & OUT)</option>
             <option value="IN">Only Stock In (+)</option>
@@ -143,7 +143,7 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({
               setProductFilter(e.target.value ? Number(e.target.value) : '');
               setPage(1);
             }}
-            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
+            className="w-full sm:w-auto px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
           >
             <option value="">All Products</option>
             {products.map((p) => (
@@ -157,7 +157,7 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({
         <button
           onClick={fetchTransactions}
           disabled={loading}
-          className="inline-flex items-center px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
         >
           <RefreshCw className={`w-3.5 h-3.5 mr-1 ${loading ? 'animate-spin' : ''}`} />
           Refresh Ledger

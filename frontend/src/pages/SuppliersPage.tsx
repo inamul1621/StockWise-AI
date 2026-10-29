@@ -87,17 +87,17 @@ export const SuppliersPage: React.FC<SuppliersPageProps> = ({
   return (
     <div className="space-y-6">
       {/* Header and Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-black text-gray-950 dark:text-white">Supplier Directory</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h1 className="text-xl sm:text-2xl font-black text-gray-950 dark:text-white">Supplier Directory</h1>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             Manage vendors, procurement contacts, and product distribution sources
           </p>
         </div>
 
         <button
           onClick={onOpenCreateModal}
-          className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm transition-colors"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm transition-colors"
         >
           <Plus className="w-4 h-4 mr-1.5" />
           Add Supplier
@@ -114,8 +114,8 @@ export const SuppliersPage: React.FC<SuppliersPageProps> = ({
       {error && <Alert type="error" message={error} onClose={() => setError(null)} />}
 
       {/* Search */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-        <form onSubmit={handleSearchSubmit} className="flex gap-3">
+      <div className="bg-white dark:bg-gray-900 p-3.5 sm:p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="relative flex-1">
             <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
             <input
@@ -128,7 +128,7 @@ export const SuppliersPage: React.FC<SuppliersPageProps> = ({
           </div>
           <button
             type="submit"
-            className="px-4 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 rounded-lg transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 rounded-lg transition-colors text-center"
           >
             Search
           </button>

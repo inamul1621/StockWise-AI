@@ -31,7 +31,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         <span className="font-semibold text-gray-900 dark:text-white">{total}</span> items
       </div>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-between w-full sm:w-auto space-x-2">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={disabled || page <= 1}
@@ -41,8 +41,8 @@ export const Pagination: React.FC<PaginationProps> = ({
           Previous
         </button>
 
-        <span className="px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg">
-          Page {page} of {pages}
+        <span className="px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg text-center">
+          {page} / {pages}
         </span>
 
         <button

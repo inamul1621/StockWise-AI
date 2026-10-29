@@ -111,17 +111,17 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   return (
     <div className="space-y-6">
       {/* Header and Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-black text-gray-950 dark:text-white">Products Catalog</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h1 className="text-xl sm:text-2xl font-black text-gray-950 dark:text-white">Products Catalog</h1>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             Create, update, and manage inventory items and prices
           </p>
         </div>
 
         <button
           onClick={onOpenCreateModal}
-          className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm transition-colors"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-sm transition-colors"
         >
           <Plus className="w-4 h-4 mr-1.5" />
           Add Product
@@ -138,8 +138,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       {error && <Alert type="error" message={error} onClose={() => setError(null)} />}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
-        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3">
+      <div className="bg-white dark:bg-gray-900 p-3.5 sm:p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="relative flex-1">
             <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
             <input
@@ -154,7 +154,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           <div className="flex gap-2">
             <button
               type="submit"
-              className="px-4 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 rounded-lg transition-colors"
+              className="flex-1 sm:flex-initial px-4 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 rounded-lg transition-colors text-center"
             >
               Search
             </button>
@@ -167,7 +167,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 setPage(1);
                 fetchProducts();
               }}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors shrink-0"
               title="Reset Filters"
             >
               <RefreshCw className="w-4 h-4" />
@@ -175,8 +175,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           </div>
         </form>
 
-        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-gray-100 dark:border-gray-800 text-xs">
-          <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2 border-t border-gray-100 dark:border-gray-800 text-xs">
+          <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 shrink-0">
             <Filter className="w-3.5 h-3.5" />
             <span className="font-semibold">Filter:</span>
           </div>
@@ -189,7 +189,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               setCategoryFilter(e.target.value);
               setPage(1);
             }}
-            className="px-2.5 py-1 text-xs border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-md focus:ring-1 focus:ring-brand-500"
+            className="flex-1 sm:flex-initial min-w-[120px] px-2.5 py-1 text-xs border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-md focus:ring-1 focus:ring-brand-500"
           />
 
           <select
@@ -198,7 +198,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               setSupplierFilter(e.target.value ? Number(e.target.value) : '');
               setPage(1);
             }}
-            className="px-2.5 py-1 text-xs border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-md focus:ring-1 focus:ring-brand-500"
+            className="flex-1 sm:flex-initial min-w-[130px] px-2.5 py-1 text-xs border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-md focus:ring-1 focus:ring-brand-500"
           >
             <option value="">All Suppliers</option>
             {suppliers.map((s) => (

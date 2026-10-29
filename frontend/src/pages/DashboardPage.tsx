@@ -123,48 +123,48 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
       {/* Secondary KPI Bar */}
       {summary && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl border bg-amber-50/50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800/50 flex items-center justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="p-3.5 sm:p-4 rounded-xl border bg-amber-50/50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800/50 flex flex-col xs:flex-row xs:items-center justify-between gap-2">
             <div className="flex items-center space-x-3">
-              <div className="p-2.5 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400">
+              <div className="p-2 sm:p-2.5 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 shrink-0">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-xs font-bold uppercase text-amber-800 dark:text-amber-300">Low Stock Alerts</p>
-                <p className="text-lg font-black text-amber-950 dark:text-amber-100">
+                <p className="text-base sm:text-lg font-black text-amber-950 dark:text-amber-100">
                   {summary.low_stock_products_count} Products
                 </p>
               </div>
             </div>
-            <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">Below Reorder Level</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-amber-700 dark:text-amber-400">Below Reorder Level</span>
           </div>
 
-          <div className="p-4 rounded-xl border bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-800/50 flex items-center justify-between">
+          <div className="p-3.5 sm:p-4 rounded-xl border bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-800/50 flex flex-col xs:flex-row xs:items-center justify-between gap-2">
             <div className="flex items-center space-x-3">
-              <div className="p-2.5 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400">
+              <div className="p-2 sm:p-2.5 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 shrink-0">
                 <XOctagon className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-xs font-bold uppercase text-red-800 dark:text-red-300">Out of Stock</p>
-                <p className="text-lg font-black text-red-950 dark:text-red-100">
+                <p className="text-base sm:text-lg font-black text-red-950 dark:text-red-100">
                   {summary.out_of_stock_products_count} Products
                 </p>
               </div>
             </div>
-            <span className="text-xs font-semibold text-red-700 dark:text-red-400">Zero Inventory</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-red-700 dark:text-red-400">Zero Inventory</span>
           </div>
 
-          <div className="p-4 rounded-xl border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 flex items-center justify-between">
+          <div className="p-3.5 sm:p-4 rounded-xl border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 flex flex-col xs:flex-row xs:items-center justify-between gap-2">
             <div className="flex items-center space-x-3">
-              <div className="p-2.5 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              <div className="p-2 sm:p-2.5 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 shrink-0">
                 <Truck className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-xs font-bold uppercase text-gray-600 dark:text-gray-400">Active Suppliers</p>
-                <p className="text-lg font-black text-gray-900 dark:text-white">{summary.total_suppliers}</p>
+                <p className="text-base sm:text-lg font-black text-gray-900 dark:text-white">{summary.total_suppliers}</p>
               </div>
             </div>
-            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Supply Chain Partners</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-gray-500 dark:text-gray-400">Supply Chain Partners</span>
           </div>
         </div>
       )}

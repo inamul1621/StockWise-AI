@@ -104,37 +104,37 @@ export const ReportsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header and Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-black text-gray-950 dark:text-white">Inventory Reports & Analytics</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h1 className="text-xl sm:text-2xl font-black text-gray-950 dark:text-white">Inventory Reports & Analytics</h1>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             Financial valuation breakdowns and movement volume tracking
           </p>
         </div>
 
         {/* Report Tab Selector */}
-        <div className="inline-flex rounded-xl bg-gray-200 dark:bg-gray-800 p-1">
+        <div className="w-full sm:w-auto grid grid-cols-2 sm:flex rounded-xl bg-gray-200 dark:bg-gray-800 p-1">
           <button
             onClick={() => setActiveReport('valuation')}
-            className={`flex items-center px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+            className={`flex items-center justify-center px-3 sm:px-4 py-2 text-xs font-bold rounded-lg transition-all ${
               activeReport === 'valuation'
                 ? 'bg-white dark:bg-gray-700 text-gray-950 dark:text-white shadow-sm'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-white'
             }`}
           >
-            <BarChart3 className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400" />
-            Stock Valuation
+            <BarChart3 className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400 shrink-0" />
+            <span>Stock Valuation</span>
           </button>
           <button
             onClick={() => setActiveReport('movements')}
-            className={`flex items-center px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+            className={`flex items-center justify-center px-3 sm:px-4 py-2 text-xs font-bold rounded-lg transition-all ${
               activeReport === 'movements'
                 ? 'bg-white dark:bg-gray-700 text-gray-950 dark:text-white shadow-sm'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-950 dark:hover:text-white'
             }`}
           >
-            <ArrowLeftRight className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400" />
-            Movements Summary
+            <ArrowLeftRight className="w-4 h-4 mr-1.5 text-brand-600 dark:text-brand-400 shrink-0" />
+            <span>Movements Summary</span>
           </button>
         </div>
       </div>
@@ -299,46 +299,52 @@ export const ReportsPage: React.FC = () => {
           {movError && <Alert type="error" message={movError} onClose={() => setMovError(null)} />}
 
           {/* Date & Filter Controls */}
-          <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-wrap items-center gap-3 text-xs">
-            <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 font-semibold">
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Date Range:</span>
+          <div className="bg-white dark:bg-gray-900 p-3.5 sm:p-4 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm flex flex-col md:flex-row md:items-center gap-3 text-xs">
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center space-x-1.5 text-gray-500 dark:text-gray-400 font-semibold shrink-0">
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Date Range:</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
+                />
+                <span className="text-gray-400">to</span>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
+                />
+              </div>
             </div>
 
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
-            />
-            <span className="text-gray-400">to</span>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500"
-            />
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 flex-1">
+              <select
+                value={selectedProductId}
+                onChange={(e) => setSelectedProductId(e.target.value ? Number(e.target.value) : '')}
+                className="flex-1 px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
+              >
+                <option value="">All Catalog Products</option>
+                {productsList.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name} ({p.sku})
+                  </option>
+                ))}
+              </select>
 
-            <select
-              value={selectedProductId}
-              onChange={(e) => setSelectedProductId(e.target.value ? Number(e.target.value) : '')}
-              className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-1 focus:ring-brand-500 font-medium"
-            >
-              <option value="">All Catalog Products</option>
-              {productsList.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name} ({p.sku})
-                </option>
-              ))}
-            </select>
-
-            <button
-              onClick={fetchMovementsReport}
-              disabled={movLoading}
-              className="px-4 py-1.5 bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 text-white font-semibold rounded-lg transition-colors"
-            >
-              Filter Movements
-            </button>
+              <button
+                onClick={fetchMovementsReport}
+                disabled={movLoading}
+                className="px-4 py-1.5 bg-gray-900 hover:bg-black dark:bg-brand-600 dark:hover:bg-brand-700 text-white font-semibold rounded-lg transition-colors text-center shrink-0"
+              >
+                Filter Movements
+              </button>
+            </div>
           </div>
 
           {/* Movements Summary KPI Bar */}

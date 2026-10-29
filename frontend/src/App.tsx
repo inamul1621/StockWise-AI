@@ -103,7 +103,7 @@ export const App: React.FC = () => {
         />
 
         {/* Main Content View */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-950">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 lg:p-8 bg-white dark:bg-gray-950">
           <div className="max-w-7xl mx-auto">
             {activeTab === 'dashboard' && (
               <DashboardPage
