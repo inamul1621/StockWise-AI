@@ -51,10 +51,16 @@ class Settings(BaseSettings):
     @property
     def sync_database_url(self) -> str:
         """
-        Constructs a psycopg 3 compatible database URL if DATABASE_URL is not set directly.
+        Constructs a psycopg 3 compatible database URL.
+        If DATABASE_URL is provided (e.g., from Render/Neon/Supabase), converts postgres:// or postgresql:// to postgresql+psycopg://
         """
         if self.DATABASE_URL:
-            return self.DATABASE_URL
+            url = self.DATABASE_URL
+            if url.startswith("postgres://"):
+                url = url.replace("postgres://", "postgresql+psycopg://", 1)
+            elif url.startswith("postgresql://") and not url.startswith("postgresql+psycopg://"):
+                url = url.replace("postgresql://", "postgresql+psycopg://", 1)
+            return url
         return (
             f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
             f"@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
@@ -67,14 +73,15 @@ class Settings(BaseSettings):
         """
         # 1. Essential database parameters must not be empty
         missing_db_fields = []
-        if not self.POSTGRES_USER:
-            missing_db_fields.append("POSTGRES_USER")
-        if not self.POSTGRES_PASSWORD:
-            missing_db_fields.append("POSTGRES_PASSWORD")
-        if not self.POSTGRES_DB:
-            missing_db_fields.append("POSTGRES_DB")
-        if not self.POSTGRES_SERVER:
-            missing_db_fields.append("POSTGRES_SERVER")
+        if not self.DATABASE_URL:
+            if not self.POSTGRES_USER:
+                missing_db_fields.append("POSTGRES_USER")
+            if not self.POSTGRES_PASSWORD:
+                missing_db_fields.append("POSTGRES_PASSWORD")
+            if not self.POSTGRES_DB:
+                missing_db_fields.append("POSTGRES_DB")
+            if not self.POSTGRES_SERVER:
+                missing_db_fields.append("POSTGRES_SERVER")
 
         if missing_db_fields:
             raise ValueError(
@@ -87,7 +94,7 @@ class Settings(BaseSettings):
                 raise ValueError("Security Violation: DEBUG mode must be False in production.")
 
             insecure_passwords = {"stockwise_pass", "postgres", "password", "123456", "admin"}
-            if self.POSTGRES_PASSWORD.lower() in insecure_passwords:
+            if not self.DATABASE_URL and self.POSTGRES_PASSWORD.lower() in insecure_passwords:
                 raise ValueError(
                     "Security Violation: Insecure default database password detected in production. "
                     "Please configure a strong POSTGRES_PASSWORD."
